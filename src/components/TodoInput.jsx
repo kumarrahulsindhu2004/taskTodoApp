@@ -4,13 +4,24 @@ function TodoInput({ addTask }) {
   const [text, setText] = useState("");
   const [error, setError] = useState("");
 
+
+  const toTitleCase = (text) => {
+  return text
+    .toLowerCase()
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
+
   const handleAdd = () => {
     if (!text.trim()) {
       setError("Please enter a task");
       return;
     }
-
-    addTask(text);
+    
+    const formattedText = toTitleCase(text);
+    addTask(formattedText);
     setText("");
     setError(""); // clear error after success
   };
